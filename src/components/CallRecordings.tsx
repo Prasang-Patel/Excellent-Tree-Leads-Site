@@ -1,11 +1,11 @@
-import { Play, Phone } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 export default function CallRecordings() {
   const recordings = [
-    { id: "014", type: "EMERGENCY REMOVAL", desc: "REMOVAL · TAMPA, FL", duration: "2:41" },
-    { id: "027", type: "TWO TREES + STUMP", desc: "REMOVAL + GRINDING · FRISCO, TX", duration: "3:08" },
-    { id: "041", type: "STORM CLEANUP", desc: "STORM RESPONSE · RALEIGH, NC", duration: "1:56" },
-    { id: "052", type: "TRIMMING ESTIMATE", desc: "TRIMMING · BOISE, ID", duration: "2:22" }
+    { id: "014", type: "MASSIVE OAK ON ROOF", desc: "STORM RESPONSE + EMERGENCY TREE REMOVAL", audioSrc: "" },
+    { id: "027", type: "TWO TREES + STUMP", desc: "REMOVAL + GRINDING · FRISCO, TX", audioSrc: "" },
+    { id: "041", type: "STORM CLEANUP", desc: "STORM RESPONSE · RALEIGH, NC", audioSrc: "" },
+    { id: "052", type: "TRIMMING ESTIMATE", desc: "TRIMMING · BOISE, ID", audioSrc: "" }
   ];
 
   return (
@@ -32,19 +32,13 @@ export default function CallRecordings() {
               </div>
               <p className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase mb-6">{rec.desc}</p>
               
-              <div className="flex items-center gap-4 mb-4">
-                <button className="w-10 h-10 rounded-full bg-[#a2e634] hover:bg-[#8cc62c] flex items-center justify-center flex-shrink-0 transition-colors">
-                  <Play className="w-4 h-4 text-[#0d1611] fill-current ml-1" />
-                </button>
-                <div className="flex-grow flex items-center gap-1.5 opacity-50">
-                  {/* Fake waveform */}
-                  {[...Array(24)].map((_, i) => (
-                    <div key={i} className="w-1 rounded-full bg-slate-500" style={{ height: `${Math.max(4, Math.random() * 20)}px` }}></div>
-                  ))}
-                </div>
-                <span className="text-slate-400 text-xs font-mono">{rec.duration}</span>
+              <div className="w-full">
+                <audio controls className="w-full h-12 rounded-md outline-none">
+                  <source src={rec.audioSrc} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
               </div>
-              <p className="text-slate-600 text-[10px] tracking-widest uppercase">Recording embed slot</p>
+              <p className="text-slate-600 text-[10px] tracking-widest uppercase mt-3">Recording embed slot</p>
             </div>
           ))}
         </div>
