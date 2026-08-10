@@ -49,22 +49,25 @@ export default function Hero() {
             </a>
           </div>
           
-          <div className="border-t border-white/10 pt-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-3xl font-black text-[#a2e634] mb-1">41,000+</div>
-              <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Calls Delivered</div>
-            </div>
-            <div>
-              <div className="text-3xl font-black text-[#a2e634] mb-1">380+</div>
-              <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Tree Companies Served</div>
-            </div>
-            <div>
-              <div className="text-3xl font-black text-[#a2e634] mb-1">100%</div>
-              <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">Exclusive Calls</div>
-            </div>
-            <div>
-              <div className="text-3xl font-black text-[#a2e634] mb-1">6 yrs</div>
-              <div className="text-[10px] font-bold text-slate-400 tracking-widest uppercase">In The Trees Niche</div>
+          <div className="border-t border-white/10 pt-8">
+            <p className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-6">TRUSTED BY TOP TREE CARE COMPANIES NATIONWIDE</p>
+            <div className="flex flex-wrap items-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span className="text-white font-bold text-lg tracking-tighter">OAK & PINE</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 2 22 22 22 12 2"/></svg>
+                <span className="text-white font-bold text-lg tracking-widest uppercase">Apex Arbor</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22v-7l-2-2"/></svg>
+                <span className="text-white font-black text-xl italic tracking-tighter">TimberWorks</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 2v20"/></svg>
+                <span className="text-white font-semibold text-lg tracking-tight">ECO-TREE</span>
+              </div>
             </div>
           </div>
         </div>

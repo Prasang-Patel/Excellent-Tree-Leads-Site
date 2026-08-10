@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .ticker-track {
   animation: marquee 35s linear infinite;
 }

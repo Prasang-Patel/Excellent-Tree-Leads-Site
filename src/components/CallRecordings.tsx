@@ -1,11 +1,63 @@
-import { Phone } from 'lucide-react';
+import { Phone, Play, Pause } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+
+function AudioPlayer({ src, duration }: { src?: string; duration: string }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  
+  // Use a fixed seed for the fake waveform so it doesn't jump around on re-renders
+  const waveformHeights = [6, 12, 8, 16, 10, 20, 14, 8, 12, 6, 10, 18, 12, 8, 14, 10, 6, 12, 18, 14, 8, 12, 6, 10];
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      const handleEnded = () => setIsPlaying(false);
+      audio.addEventListener('ended', handleEnded);
+      return () => audio.removeEventListener('ended', handleEnded);
+    }
+  }, []);
+
+  return (
+    <div className="flex items-center gap-4 mb-4">
+      {src && <audio ref={audioRef} src={src} preload="none" />}
+      <button 
+        onClick={togglePlay}
+        disabled={!src}
+        className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${src ? 'bg-[#a2e634] hover:bg-[#8cc62c] cursor-pointer' : 'bg-[#a2e634]/30 cursor-not-allowed'}`}
+      >
+        {isPlaying ? (
+          <Pause className="w-4 h-4 text-[#0d1611] fill-current" />
+        ) : (
+          <Play className="w-4 h-4 text-[#0d1611] fill-current ml-1" />
+        )}
+      </button>
+      <div className="flex-grow flex items-center gap-1.5 opacity-50">
+        {waveformHeights.map((h, i) => (
+          <div key={i} className={`w-1 rounded-full ${isPlaying ? 'bg-[#a2e634]' : 'bg-slate-500'}`} style={{ height: `${h}px` }}></div>
+        ))}
+      </div>
+      <span className="text-slate-400 text-xs font-mono">{duration}</span>
+    </div>
+  );
+}
 
 export default function CallRecordings() {
   const recordings = [
-    { id: "014", type: "MASSIVE OAK ON ROOF", desc: "STORM RESPONSE + EMERGENCY TREE REMOVAL", audioSrc: "" },
-    { id: "027", type: "TWO TREES + STUMP", desc: "REMOVAL + GRINDING · FRISCO, TX", audioSrc: "" },
-    { id: "041", type: "STORM CLEANUP", desc: "STORM RESPONSE · RALEIGH, NC", audioSrc: "" },
-    { id: "052", type: "TRIMMING ESTIMATE", desc: "TRIMMING · BOISE, ID", audioSrc: "" }
+    { id: "014", type: "MASSIVE OAK ON ROOF", desc: "STORM RESPONSE + EMERGENCY TREE REMOVAL", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", duration: "2:41" },
+    { id: "027", type: "TWO TREES + STUMP", desc: "TREE REMOVAL + GRINDING", audioSrc: undefined, duration: "3:08" },
+    { id: "041", type: "STORM CLEANUP", desc: "STORM RESPONSE", audioSrc: undefined, duration: "1:56" },
+    { id: "052", type: "TRIMMING ESTIMATE", desc: "TREE REMOVAL + INSPECTION", audioSrc: undefined, duration: "2:22" }
   ];
 
   return (
@@ -32,12 +84,8 @@ export default function CallRecordings() {
               </div>
               <p className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase mb-6">{rec.desc}</p>
               
-              <div className="w-full">
-                <audio controls className="w-full h-12 rounded-md outline-none">
-                  <source src={rec.audioSrc} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-              </div>
+              <AudioPlayer src={rec.audioSrc} duration={rec.duration} />
+              
               <p className="text-slate-600 text-[10px] tracking-widest uppercase mt-3">Recording embed slot</p>
             </div>
           ))}
