@@ -1,0 +1,8 @@
+{
+  "name": "Excellent Tree Leads Landing Page",
+  "description": "A single-page landing page for a pay-per-lead tree service offer, featuring testimonials, call recordings, lead examples, a comparison table, pricing packages, and a guarantee.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
