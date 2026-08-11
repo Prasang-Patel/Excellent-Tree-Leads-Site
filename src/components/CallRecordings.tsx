@@ -29,7 +29,7 @@ function AudioPlayer({ src, duration }: { src?: string; duration: string }) {
   }, []);
 
   return (
-    <div className="flex items-center gap-4 mb-4">
+    <div className="flex items-center gap-2 sm:gap-4 mb-2">
       {src && <audio ref={audioRef} src={src} preload="none" />}
       <button 
         onClick={togglePlay}
@@ -42,12 +42,12 @@ function AudioPlayer({ src, duration }: { src?: string; duration: string }) {
           <Play className="w-4 h-4 text-[#0d1611] fill-current ml-1" />
         )}
       </button>
-      <div className="flex-grow flex items-center gap-1.5 opacity-50">
+      <div className="flex-grow flex items-center gap-1 sm:gap-1.5 opacity-50 overflow-hidden">
         {waveformHeights.map((h, i) => (
-          <div key={i} className={`w-1 rounded-full ${isPlaying ? 'bg-[#a2e634]' : 'bg-slate-500'}`} style={{ height: `${h}px` }}></div>
+          <div key={i} className={`min-w-[2px] sm:min-w-[4px] w-0.5 sm:w-1 rounded-full ${isPlaying ? 'bg-[#a2e634]' : 'bg-slate-500'}`} style={{ height: `${h}px` }}></div>
         ))}
       </div>
-      <span className="text-slate-400 text-xs font-mono">{duration}</span>
+      <span className="text-slate-400 text-xs font-mono flex-shrink-0 ml-1">{duration}</span>
     </div>
   );
 }
@@ -55,9 +55,12 @@ function AudioPlayer({ src, duration }: { src?: string; duration: string }) {
 export default function CallRecordings() {
   const recordings = [
     { id: "014", type: "MASSIVE OAK ON ROOF", desc: "STORM RESPONSE + EMERGENCY TREE REMOVAL", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", duration: "2:41" },
-    { id: "027", type: "TWO TREES + STUMP", desc: "TREE REMOVAL + GRINDING", audioSrc: undefined, duration: "3:08" },
-    { id: "041", type: "STORM CLEANUP", desc: "STORM RESPONSE", audioSrc: undefined, duration: "1:56" },
-    { id: "052", type: "TRIMMING ESTIMATE", desc: "TREE REMOVAL + INSPECTION", audioSrc: undefined, duration: "2:22" }
+    { id: "027", type: "TWO TREES + STUMP", desc: "TREE REMOVAL + GRINDING", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", duration: "3:08" },
+    { id: "041", type: "STORM CLEANUP", desc: "STORM RESPONSE", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", duration: "1:56" },
+    { id: "052", type: "TRIMMING ESTIMATE", desc: "TREE REMOVAL + INSPECTION", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", duration: "2:22" },
+    { id: "068", type: "FRONT YARD PINE", desc: "TREE REMOVAL", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", duration: "1:34" },
+    { id: "074", type: "MULTIPLE OAKS", desc: "TREE TRIMMING", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", duration: "4:12" },
+    { id: "089", type: "DEAD ASH TAKEDOWN", desc: "TREE REMOVAL", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", duration: "2:15" }
   ];
 
   return (
@@ -85,8 +88,6 @@ export default function CallRecordings() {
               <p className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase mb-6">{rec.desc}</p>
               
               <AudioPlayer src={rec.audioSrc} duration={rec.duration} />
-              
-              <p className="text-slate-600 text-[10px] tracking-widest uppercase mt-3">Recording embed slot</p>
             </div>
           ))}
         </div>

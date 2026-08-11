@@ -70,7 +70,7 @@ export default function LeadGallery() {
           A sample of calls routed last month. Names shortened for homeowner privacy.
         </p>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {textLeads.map((lead, idx) => (
             <div key={idx} className="bg-[#132017] border border-white/5 rounded-xl p-6 flex flex-col justify-between">
               <div>
@@ -92,19 +92,6 @@ export default function LeadGallery() {
               </div>
               <div className="pt-4 border-t border-white/5">
                 <p className="text-slate-500 text-xs italic">{lead.status}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {photoLeads.map((photo, idx) => (
-            <div key={idx} className="relative rounded-xl overflow-hidden aspect-[4/3] group border border-white/5">
-              <img src={photo.url} alt={photo.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0d1611] via-[#0d1611]/50 to-transparent"></div>
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <h4 className="text-white font-bold tracking-tight mb-1">{photo.title}</h4>
-                <p className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase">{photo.subtitle}</p>
               </div>
             </div>
           ))}

@@ -1,15 +1,16 @@
 import { ArrowRight, PlayCircle, CheckCircle2 } from 'lucide-react';
 import Navbar from './Navbar';
+import heroBg from '../assets/images/arborist_crane_chainsaw_bg_1786391442323.jpg';
 
 export default function Hero() {
   return (
     <section className="relative bg-[#0d1611] pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[90vh] flex flex-col justify-center border-b border-white/5">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1588629085695-976db57bd24a?auto=format&fit=crop&q=80&w=2000" 
+          src={heroBg} 
           alt="Arborist working in tree" 
-          className="w-full h-full object-cover opacity-25 mix-blend-luminosity"
+          className="w-full h-[70vh] sm:h-full object-cover object-[top_right] sm:object-center opacity-30 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d1611] via-[#0d1611]/90 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d1611] via-[#0d1611]/50 to-transparent"></div>
@@ -19,17 +20,17 @@ export default function Hero() {
 
       <Navbar />
       
-      <div className="max-w-7xl mx-auto relative z-10 w-full mt-12">
+      <div className="max-w-7xl mx-auto relative z-10 w-full mt-20 sm:mt-12">
         <div className="max-w-3xl">
           <div className="inline-flex items-center gap-2 border border-[#a2e634]/30 rounded-full px-3 py-1.5 mb-6 bg-[#0d1611]/50 backdrop-blur-sm">
             <CheckCircle2 className="w-4 h-4 text-[#a2e634]" />
             <span className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase">Pay Per Call • Tree Services Only</span>
           </div>
           
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5rem] font-black text-white leading-[1.05] tracking-tight mb-8">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-black text-white leading-[1.05] tracking-tight mb-8">
             EXCLUSIVE<br />
             TREE WORK<br />
-            <span className="text-[#a2e634] inline-block bg-[#a2e634]/10 px-2 -mx-2">PHONE CALLS.</span><br />
+            <span className="text-[#a2e634]">PHONE CALLS.</span><br />
             NOT SHARED<br />
             LEADS.
           </h1>

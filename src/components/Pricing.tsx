@@ -4,38 +4,38 @@ export default function Pricing() {
   const packages = [
     {
       name: "STARTER ROUTE",
-      volume: "20 CALLS / MO",
+      volume: "10 CALLS / MO",
+      price: "$90",
+      popular: false,
+      features: [
+        "100% exclusive phone calls",
+        "Tree removal + Tree trimming",
+        "Homeowner name, phone, & address",
+        "Refunds on unqualified calls."
+      ]
+    },
+    {
+      name: "GROWTH ENGINE",
+      volume: "25 CALLS / MO",
+      price: "$75",
+      popular: true,
+      features: [
+        "100% exclusive phone calls",
+        "Tree removal + Tree trimming",
+        "Homeowner name, phone, & address",
+        "Refunds on unqualified calls."
+      ]
+    },
+    {
+      name: "MARKET LEADER",
+      volume: "50+ CALLS / MO",
       price: "$65",
       popular: false,
       features: [
-        "One service area",
-        "Removal + trimming calls",
-        "Daily cap you control",
-        "Refunds on unqualified calls"
-      ]
-    },
-    {
-      name: "CREW BUILDER",
-      volume: "50 CALLS / MO",
-      price: "$58",
-      popular: true,
-      features: [
-        "Up to three ZIP clusters",
-        "Priority storm-season routing",
-        "Dedicated tracking number",
-        "Weekly call review with us"
-      ]
-    },
-    {
-      name: "MARKET LOCK",
-      volume: "100+ CALLS / MO",
-      price: "$49",
-      popular: false,
-      features: [
-        "Exclusive market lockout",
-        "Multi-crew call scheduling",
-        "Custom hours + overflow rules",
-        "Named account manager"
+        "100% exclusive phone calls",
+        "Tree removal + Tree trimming",
+        "Homeowner name, phone, & address",
+        "Refunds on unqualified calls."
       ]
     }
   ];
@@ -65,13 +65,15 @@ export default function Pricing() {
             >
               {pkg.popular && (
                 <div className="absolute -top-3 left-8 bg-[#a2e634] text-[#0d1611] px-3 py-1 rounded text-[10px] font-bold tracking-widest uppercase">
-                  Most Booked
+                  Most Closed Jobs
                 </div>
               )}
               
               <div className="mb-8 mt-2">
                 <h3 className="text-xl font-bold text-white tracking-tight uppercase mb-2">{pkg.name}</h3>
-                <p className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase mb-6">{pkg.volume}</p>
+                <div className="bg-[#a2e634]/10 border border-[#a2e634]/20 rounded py-2 px-3 mb-6 inline-block">
+                  <p className="text-[#a2e634] text-lg font-black tracking-widest uppercase">{pkg.volume}</p>
+                </div>
                 
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-5xl font-black text-white">{pkg.price}</span>
