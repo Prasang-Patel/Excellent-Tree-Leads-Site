@@ -90,14 +90,14 @@ export default function Pricing() {
                 ))}
               </ul>
               
-              <button className={`w-full py-4 rounded font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-2 transition-colors ${
+              <a href="sms:+17064310667?body=I'm%20interested%20in%20exclusive%20calls" className={`w-full py-4 rounded font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-2 transition-colors ${
                 pkg.popular 
                   ? 'bg-[#a2e634] hover:bg-[#8cc62c] text-[#0d1611]' 
                   : 'bg-transparent border border-white/20 hover:bg-white/5 text-white'
               }`}>
                 Check My Area
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           ))}
         </div>

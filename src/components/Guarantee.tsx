@@ -21,10 +21,10 @@ export default function Guarantee() {
               If a call isn't a real homeowner with real tree work in your area, flag it and it comes off your invoice. No arguing over recordings — we both listen to the same one.
             </p>
             
-            <button className="bg-[#a2e634] hover:bg-[#8cc62c] text-[#0d1611] font-bold px-8 py-4 rounded flex items-center gap-2 text-sm transition-colors uppercase tracking-widest">
+            <a href="sms:+17064310667?body=I'm%20interested%20in%20exclusive%20calls" className="bg-[#a2e634] hover:bg-[#8cc62c] text-[#0d1611] font-bold px-8 py-4 rounded inline-flex items-center gap-2 text-sm transition-colors uppercase tracking-widest w-fit">
               <Phone className="w-4 h-4" />
               Claim My Service Area
-            </button>
+            </a>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

@@ -1,40 +1,69 @@
 import { Phone, Play, Pause } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
+import WaveSurfer from 'wavesurfer.js';
 
-function AudioPlayer({ src, duration }: { src?: string; duration: string }) {
+function formatTime(seconds: number) {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function AudioPlayer({ src }: { src: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const wavesurferRef = useRef<WaveSurfer | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
-  
-  // Use a fixed seed for the fake waveform so it doesn't jump around on re-renders
-  const waveformHeights = [6, 12, 8, 16, 10, 20, 14, 8, 12, 6, 10, 18, 12, 8, 14, 10, 6, 12, 18, 14, 8, 12, 6, 10];
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const ws = WaveSurfer.create({
+      container: containerRef.current,
+      waveColor: '#64748b', // slate-500
+      progressColor: '#a2e634', // brand color
+      height: 24,
+      barWidth: 2,
+      barGap: 2,
+      barRadius: 2,
+      cursorWidth: 0,
+      url: src,
+    });
+
+    ws.on('ready', () => {
+      setDuration(ws.getDuration());
+      setIsReady(true);
+    });
+
+    ws.on('audioprocess', () => {
+      setCurrentTime(ws.getCurrentTime());
+    });
+
+    ws.on('play', () => setIsPlaying(true));
+    ws.on('pause', () => setIsPlaying(false));
+    ws.on('finish', () => setIsPlaying(false));
+    ws.on('seek', () => setCurrentTime(ws.getCurrentTime()));
+
+    wavesurferRef.current = ws;
+
+    return () => {
+      ws.destroy();
+    };
+  }, [src]);
 
   const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+    if (wavesurferRef.current && isReady) {
+      wavesurferRef.current.playPause();
     }
   };
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio) {
-      const handleEnded = () => setIsPlaying(false);
-      audio.addEventListener('ended', handleEnded);
-      return () => audio.removeEventListener('ended', handleEnded);
-    }
-  }, []);
-
   return (
     <div className="flex items-center gap-2 sm:gap-4 mb-2">
-      {src && <audio ref={audioRef} src={src} preload="none" />}
       <button 
         onClick={togglePlay}
-        disabled={!src}
-        className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${src ? 'bg-[#a2e634] hover:bg-[#8cc62c] cursor-pointer' : 'bg-[#a2e634]/30 cursor-not-allowed'}`}
+        disabled={!isReady}
+        className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${isReady ? 'bg-[#a2e634] hover:bg-[#8cc62c] cursor-pointer' : 'bg-[#a2e634]/30 cursor-wait'}`}
       >
         {isPlaying ? (
           <Pause className="w-4 h-4 text-[#0d1611] fill-current" />
@@ -42,25 +71,26 @@ function AudioPlayer({ src, duration }: { src?: string; duration: string }) {
           <Play className="w-4 h-4 text-[#0d1611] fill-current ml-1" />
         )}
       </button>
-      <div className="flex-grow flex items-center gap-1 sm:gap-1.5 opacity-50 overflow-hidden">
-        {waveformHeights.map((h, i) => (
-          <div key={i} className={`min-w-[2px] sm:min-w-[4px] w-0.5 sm:w-1 rounded-full ${isPlaying ? 'bg-[#a2e634]' : 'bg-slate-500'}`} style={{ height: `${h}px` }}></div>
-        ))}
+      
+      <div className="flex-grow">
+        <div ref={containerRef} className="w-full"></div>
       </div>
-      <span className="text-slate-400 text-xs font-mono flex-shrink-0 ml-1">{duration}</span>
+
+      <div className="text-slate-400 text-xs font-mono flex-shrink-0 w-12 text-right">
+        {isReady ? (isPlaying ? formatTime(currentTime) : formatTime(duration)) : '--:--'}
+      </div>
     </div>
   );
 }
 
 export default function CallRecordings() {
   const recordings = [
-    { id: "014", type: "MASSIVE OAK ON ROOF", desc: "STORM RESPONSE + EMERGENCY TREE REMOVAL", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", duration: "2:41" },
-    { id: "027", type: "TWO TREES + STUMP", desc: "TREE REMOVAL + GRINDING", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3", duration: "3:08" },
-    { id: "041", type: "STORM CLEANUP", desc: "STORM RESPONSE", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3", duration: "1:56" },
-    { id: "052", type: "TRIMMING ESTIMATE", desc: "TREE REMOVAL + INSPECTION", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3", duration: "2:22" },
-    { id: "068", type: "FRONT YARD PINE", desc: "TREE REMOVAL", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3", duration: "1:34" },
-    { id: "074", type: "MULTIPLE OAKS", desc: "TREE TRIMMING", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3", duration: "4:12" },
-    { id: "089", type: "DEAD ASH TAKEDOWN", desc: "TREE REMOVAL", audioSrc: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3", duration: "2:15" }
+    { id: "01", type: "EMERGENCY TREE REMOVAL", desc: "VOICEMAIL", audioSrc: "/recordings/emergency.mp3" },
+    { id: "02", type: "STORM RESPONSE TREE REMOVAL", desc: "PHONE CALL", audioSrc: "/recordings/clarence.mp3" },
+    { id: "03", type: "TREE INSPECTION", desc: "PHONE CALL", audioSrc: "/recordings/jeff.mp3" },
+    { id: "04", type: "4-5 TREE REMOVAL", desc: "PHONE CALL", audioSrc: "/recordings/milledgeville.mp3" },
+    { id: "05", type: "TREE CUTTING", desc: "PHONE CALL", audioSrc: "/recordings/patricia.mp3" },
+    { id: "06", type: "TREE REMOVAL", desc: "VOICEMAIL", audioSrc: "/recordings/voicemail.mp3" }
   ];
 
   return (
@@ -82,12 +112,12 @@ export default function CallRecordings() {
           {recordings.map((rec) => (
             <div key={rec.id} className="bg-[#132017] border border-white/5 rounded-xl p-6">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-white font-bold tracking-tight uppercase">CALL {rec.id} — {rec.type}</h3>
+                <h3 className="text-white font-bold tracking-tight uppercase">{rec.type}</h3>
                 <Phone className="w-4 h-4 text-[#a2e634]" />
               </div>
               <p className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase mb-6">{rec.desc}</p>
               
-              <AudioPlayer src={rec.audioSrc} duration={rec.duration} />
+              <AudioPlayer src={rec.audioSrc} />
             </div>
           ))}
         </div>

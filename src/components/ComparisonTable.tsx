@@ -3,6 +3,7 @@ import { Check, X } from 'lucide-react';
 export default function ComparisonTable() {
   const ourFeatures = [
     "100% Exclusive Phone Calls",
+    "Photos of job, Address",
     "Higher Booking Rates",
     "Homeowners Call You Directly",
     "Realtime Connection",

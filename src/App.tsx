@@ -20,8 +20,8 @@ export default function App() {
       <Hero />
       <Ticker />
       <Testimonial />
-      <LeadGallery />
       <CallRecordings />
+      <LeadGallery />
       <ComparisonTable />
       <Process />
       <Pricing />
