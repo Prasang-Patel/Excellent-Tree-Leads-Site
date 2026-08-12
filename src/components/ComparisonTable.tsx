@@ -50,21 +50,21 @@ export default function ComparisonTable() {
           </div>
 
           {/* Their Card */}
-          <div className="bg-white rounded-2xl p-8 md:p-12 shadow-xl">
+          <div className="bg-[#1f1313] border border-red-500/20 rounded-2xl p-8 md:p-12 shadow-[0_0_40px_rgba(239,68,68,0.05)]">
             <div className="flex items-center gap-4 mb-10">
-              <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0">
-                <span className="text-slate-500 font-black text-xl">!</span>
+              <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0">
+                <span className="text-red-500 font-black text-xl">!</span>
               </div>
-              <h3 className="text-xl md:text-2xl font-black text-slate-800 uppercase tracking-tight">ANGI / HOMEADVISOR<br/><span className="text-sm text-slate-500 block mt-1">& OTHER LEAD VENDORS</span></h3>
+              <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">ANGI / HOMEADVISOR<br/><span className="text-sm text-slate-400 block mt-1">& OTHER LEAD VENDORS</span></h3>
             </div>
             
             <ul className="space-y-6">
               {theirFeatures.map((feature, idx) => (
                 <li key={idx} className="flex items-center gap-4">
-                  <div className="w-6 h-6 rounded-full bg-[#fee2e2] flex items-center justify-center flex-shrink-0">
-                    <X className="w-4 h-4 text-[#ef4444]" strokeWidth={3} />
+                  <div className="w-6 h-6 rounded-full border border-red-500/30 flex items-center justify-center flex-shrink-0">
+                    <X className="w-3 h-3 text-red-500" strokeWidth={3} />
                   </div>
-                  <span className="text-slate-600 font-medium">{feature}</span>
+                  <span className="text-slate-300 font-medium">{feature}</span>
                 </li>
               ))}
             </ul>

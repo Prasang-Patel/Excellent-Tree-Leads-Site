@@ -1,6 +1,12 @@
 import { Phone, Play, Pause } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import WaveSurfer from 'wavesurfer.js';
+import emergencyAudio from '../assets/recordings/emergency.mp3';
+import clarenceAudio from '../assets/recordings/clarence.mp3';
+import jeffAudio from '../assets/recordings/jeff.mp3';
+import milledgevilleAudio from '../assets/recordings/milledgeville.mp3';
+import patriciaAudio from '../assets/recordings/patricia.mp3';
+import voicemailAudio from '../assets/recordings/voicemail.mp3';
 
 function formatTime(seconds: number) {
   const m = Math.floor(seconds / 60);
@@ -17,7 +23,7 @@ function AudioPlayer({ src }: { src: string }) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || !src) return;
 
     const ws = WaveSurfer.create({
       container: containerRef.current,
@@ -75,7 +81,6 @@ function AudioPlayer({ src }: { src: string }) {
       <div className="flex-grow">
         <div ref={containerRef} className="w-full"></div>
       </div>
-
       <div className="text-slate-400 text-xs font-mono flex-shrink-0 w-12 text-right">
         {isReady ? (isPlaying ? formatTime(currentTime) : formatTime(duration)) : '--:--'}
       </div>
@@ -85,12 +90,12 @@ function AudioPlayer({ src }: { src: string }) {
 
 export default function CallRecordings() {
   const recordings = [
-    { id: "01", type: "EMERGENCY TREE REMOVAL", desc: "VOICEMAIL", audioSrc: "/recordings/emergency.mp3" },
-    { id: "02", type: "STORM RESPONSE TREE REMOVAL", desc: "PHONE CALL", audioSrc: "/recordings/clarence.mp3" },
-    { id: "03", type: "TREE INSPECTION", desc: "PHONE CALL", audioSrc: "/recordings/jeff.mp3" },
-    { id: "04", type: "4-5 TREE REMOVAL", desc: "PHONE CALL", audioSrc: "/recordings/milledgeville.mp3" },
-    { id: "05", type: "TREE CUTTING", desc: "PHONE CALL", audioSrc: "/recordings/patricia.mp3" },
-    { id: "06", type: "TREE REMOVAL", desc: "VOICEMAIL", audioSrc: "/recordings/voicemail.mp3" }
+    { id: "01", type: "EMERGENCY TREE REMOVAL", desc: "VOICEMAIL", audioSrc: emergencyAudio },
+    { id: "02", type: "STORM RESPONSE TREE REMOVAL", desc: "PHONE CALL", audioSrc: clarenceAudio },
+    { id: "03", type: "TREE INSPECTION", desc: "PHONE CALL", audioSrc: jeffAudio },
+    { id: "04", type: "4-5 TREE REMOVAL", desc: "PHONE CALL", audioSrc: milledgevilleAudio },
+    { id: "05", type: "TREE CUTTING", desc: "PHONE CALL", audioSrc: patriciaAudio },
+    { id: "06", type: "TREE REMOVAL", desc: "VOICEMAIL", audioSrc: voicemailAudio }
   ];
 
   return (

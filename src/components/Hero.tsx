@@ -2,15 +2,22 @@ import { ArrowRight, PlayCircle, CheckCircle2 } from 'lucide-react';
 import Navbar from './Navbar';
 import heroBg from '../assets/images/arborist_crane_chainsaw_bg_1786391442323.jpg';
 
+import angelsLogo from '../assets/logos/angels.jpg';
+import dmLogo from '../assets/logos/dm.jpg';
+import hopkinsLogo from '../assets/logos/hopkins.jpg';
+import seeThroughLogo from '../assets/logos/see-through.png';
+import weCareLogo from '../assets/logos/we-care.jpg';
+import williamLogo from '../assets/logos/william.jpg';
+
 export default function Hero() {
   return (
-    <section className="relative bg-[#0d1611] pt-28 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[90vh] flex flex-col justify-center border-b border-white/5">
+    <section className="relative bg-[#0d1611] pt-16 sm:pt-32 pb-6 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center border-b border-white/5">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
           src={heroBg} 
           alt="Arborist working in tree" 
-          className="w-full h-[70vh] sm:h-full object-cover object-[top_right] sm:object-center opacity-30 mix-blend-luminosity"
+          className="w-full h-[60vh] sm:h-full object-cover object-[top_right] sm:object-center opacity-30 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d1611] via-[#0d1611]/90 to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0d1611] via-[#0d1611]/50 to-transparent"></div>
@@ -22,12 +29,12 @@ export default function Hero() {
       
       <div className="max-w-7xl mx-auto relative z-10 w-full mt-2 sm:mt-0">
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 border border-[#a2e634]/30 rounded-full px-3 py-1.5 mb-4 sm:mb-6 bg-[#0d1611]/50 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 border border-[#a2e634]/30 rounded-full px-3 py-1.5 mb-2 sm:mb-6 bg-[#0d1611]/50 backdrop-blur-sm">
             <CheckCircle2 className="w-4 h-4 text-[#a2e634]" />
             <span className="text-[#a2e634] text-[10px] font-bold tracking-widest uppercase">Pay Per Call • Tree Services Only</span>
           </div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-black text-white leading-[1.05] tracking-tight mb-4 sm:mb-8">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-black text-white leading-[1.05] tracking-tight mb-2 sm:mb-8">
             EXCLUSIVE<br />
             TREE WORK<br />
             <span className="text-[#a2e634]">PHONE CALLS.</span><br />
@@ -35,16 +42,16 @@ export default function Hero() {
             LEADS.
           </h1>
           
-          <p className="text-lg sm:text-xl text-slate-300 mb-6 sm:mb-10 max-w-xl leading-relaxed">
+          <p className="text-base sm:text-xl text-slate-300 mb-3 sm:mb-10 max-w-xl leading-relaxed">
             High-intent homeowners inside your service area call your phone directly. You only pay for qualified calls — and unqualified ones get refunded.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-16">
-            <a href="#packages" className="inline-flex items-center justify-center bg-[#a2e634] hover:bg-[#8cc62c] text-[#0d1611] px-6 py-3.5 sm:px-8 sm:py-4 rounded font-bold text-sm tracking-widest uppercase transition-colors">
+          <div className="flex flex-col sm:flex-row gap-4 mb-4 sm:mb-16">
+            <a href="#packages" className="inline-flex items-center justify-center bg-[#a2e634] hover:bg-[#8cc62c] text-[#0d1611] px-4 py-3 sm:px-8 sm:py-4 text-xs sm:text-sm rounded font-bold tracking-widest uppercase transition-colors">
               SEE LEAD PACKAGES
               <ArrowRight className="ml-2 w-4 h-4" />
             </a>
-            <a href="#recordings" className="inline-flex items-center justify-center bg-transparent border border-white/20 hover:bg-white/5 text-white px-6 py-3.5 sm:px-8 sm:py-4 rounded font-bold text-sm tracking-widest uppercase transition-colors">
+            <a href="#recordings" className="inline-flex items-center justify-center bg-transparent border border-white/20 hover:bg-white/5 text-white px-4 py-3 sm:px-8 sm:py-4 text-xs sm:text-sm rounded font-bold tracking-widest uppercase transition-colors">
               <PlayCircle className="mr-2 w-5 h-5" />
               HEAR REAL CALLS
             </a>
@@ -54,22 +61,22 @@ export default function Hero() {
             <p className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-6">TRUSTED BY TOP TREE CARE COMPANIES NATIONWIDE</p>
             <div className="inline-grid grid-cols-3 gap-4 sm:gap-12 w-full max-w-3xl justify-items-center">
               <div className="flex items-center justify-center">
-                <img src="/logos/angels.jpg" alt="Angels Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
+                {angelsLogo && <img src={angelsLogo} alt="Angels Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
               </div>
               <div className="flex items-center justify-center">
-                <img src="/logos/dm.jpg" alt="D&M Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
+                {dmLogo && <img src={dmLogo} alt="D&M Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
               </div>
               <div className="flex items-center justify-center">
-                <img src="/logos/hopkins.jpg" alt="Hopkins Arbor Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
+                {hopkinsLogo && <img src={hopkinsLogo} alt="Hopkins Arbor Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
               </div>
               <div className="flex items-center justify-center">
-                <img src="/logos/see-through.png" alt="Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
+                {seeThroughLogo && <img src={seeThroughLogo} alt="Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
               </div>
               <div className="flex items-center justify-center">
-                <img src="/logos/we-care.jpg" alt="We Care Tree Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
+                {weCareLogo && <img src={weCareLogo} alt="We Care Tree Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
               </div>
               <div className="flex items-center justify-center">
-                <img src="/logos/william.jpg" alt="William Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
+                {williamLogo && <img src={williamLogo} alt="William Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
               </div>
             </div>
           </div>
