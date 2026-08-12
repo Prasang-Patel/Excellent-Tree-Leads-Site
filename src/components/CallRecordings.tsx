@@ -1,12 +1,6 @@
 import { Phone, Play, Pause } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import WaveSurfer from 'wavesurfer.js';
-import emergencyAudio from '../assets/recordings/emergency.mp3';
-import clarenceAudio from '../assets/recordings/clarence.mp3';
-import jeffAudio from '../assets/recordings/jeff.mp3';
-import milledgevilleAudio from '../assets/recordings/milledgeville.mp3';
-import patriciaAudio from '../assets/recordings/patricia.mp3';
-import voicemailAudio from '../assets/recordings/voicemail.mp3';
 
 function formatTime(seconds: number) {
   const m = Math.floor(seconds / 60);
@@ -16,6 +10,7 @@ function formatTime(seconds: number) {
 
 function AudioPlayer({ src }: { src: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const wavesurferRef = useRef<WaveSurfer | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -23,10 +18,11 @@ function AudioPlayer({ src }: { src: string }) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (!containerRef.current || !src) return;
+    if (!containerRef.current || !src || !audioRef.current) return;
 
     const ws = WaveSurfer.create({
       container: containerRef.current,
+      media: audioRef.current,
       waveColor: '#64748b', // slate-500
       progressColor: '#a2e634', // brand color
       height: 24,
@@ -34,7 +30,6 @@ function AudioPlayer({ src }: { src: string }) {
       barGap: 2,
       barRadius: 2,
       cursorWidth: 0,
-      url: src,
     });
 
     ws.on('ready', () => {
@@ -66,6 +61,7 @@ function AudioPlayer({ src }: { src: string }) {
 
   return (
     <div className="flex items-center gap-2 sm:gap-4 mb-2">
+      <audio ref={audioRef} src={src}  style={{ display: 'none' }} />
       <button 
         onClick={togglePlay}
         disabled={!isReady}
@@ -90,12 +86,12 @@ function AudioPlayer({ src }: { src: string }) {
 
 export default function CallRecordings() {
   const recordings = [
-    { id: "01", type: "EMERGENCY TREE REMOVAL", desc: "VOICEMAIL", audioSrc: emergencyAudio },
-    { id: "02", type: "STORM RESPONSE TREE REMOVAL", desc: "PHONE CALL", audioSrc: clarenceAudio },
-    { id: "03", type: "TREE INSPECTION", desc: "PHONE CALL", audioSrc: jeffAudio },
-    { id: "04", type: "4-5 TREE REMOVAL", desc: "PHONE CALL", audioSrc: milledgevilleAudio },
-    { id: "05", type: "TREE CUTTING", desc: "PHONE CALL", audioSrc: patriciaAudio },
-    { id: "06", type: "TREE REMOVAL", desc: "VOICEMAIL", audioSrc: voicemailAudio }
+    { id: "01", type: "EMERGENCY TREE REMOVAL", desc: "VOICEMAIL", audioSrc: "/recordings/emergency.mp3" },
+    { id: "02", type: "STORM RESPONSE TREE REMOVAL", desc: "PHONE CALL", audioSrc: "/recordings/clarence.mp3" },
+    { id: "03", type: "TREE INSPECTION", desc: "PHONE CALL", audioSrc: "/recordings/jeff.mp3" },
+    { id: "04", type: "4-5 TREE REMOVAL", desc: "PHONE CALL", audioSrc: "/recordings/milledgeville.mp3" },
+    { id: "05", type: "TREE CUTTING", desc: "PHONE CALL", audioSrc: "/recordings/patricia.mp3" },
+    { id: "06", type: "TREE REMOVAL", desc: "VOICEMAIL", audioSrc: "/recordings/voicemail.mp3" }
   ];
 
   return (
@@ -107,7 +103,7 @@ export default function CallRecordings() {
         </div>
         
         <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight leading-tight">
-          LISTEN TO THE KIND OF<br />CALL YOU'D GET
+          LISTEN TO THE KIND OF<br />CALLS YOU'D GET
         </h2>
         <p className="text-slate-400 mb-12 max-w-xl">
           Homeowner-initiated, in-area, ready to schedule. Every call is recorded so both sides can review it.

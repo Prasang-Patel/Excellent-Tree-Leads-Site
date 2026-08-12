@@ -2,16 +2,10 @@ import { ArrowRight, PlayCircle, CheckCircle2 } from 'lucide-react';
 import Navbar from './Navbar';
 import heroBg from '../assets/images/arborist_crane_chainsaw_bg_1786391442323.jpg';
 
-import angelsLogo from '../assets/logos/angels.jpg';
-import dmLogo from '../assets/logos/dm.jpg';
-import hopkinsLogo from '../assets/logos/hopkins.jpg';
-import seeThroughLogo from '../assets/logos/see-through.png';
-import weCareLogo from '../assets/logos/we-care.jpg';
-import williamLogo from '../assets/logos/william.jpg';
 
 export default function Hero() {
   return (
-    <section className="relative bg-[#0d1611] pt-16 sm:pt-32 pb-6 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[85vh] sm:min-h-[90vh] flex flex-col justify-center border-b border-white/5">
+    <section className="relative bg-[#0d1611] pt-36 sm:pt-32 pb-6 sm:pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-[90vh] flex flex-col justify-center border-b border-white/5">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
@@ -61,22 +55,22 @@ export default function Hero() {
             <p className="text-[10px] font-bold text-slate-400 tracking-widest uppercase mb-6">TRUSTED BY TOP TREE CARE COMPANIES NATIONWIDE</p>
             <div className="inline-grid grid-cols-3 gap-4 sm:gap-12 w-full max-w-3xl justify-items-center">
               <div className="flex items-center justify-center">
-                {angelsLogo && <img src={angelsLogo} alt="Angels Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
+                <img src="/logos/angels.jpg" alt="Angels Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
               </div>
               <div className="flex items-center justify-center">
-                {dmLogo && <img src={dmLogo} alt="D&M Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
+                <img src="/logos/dm.jpg" alt="D&M Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
               </div>
               <div className="flex items-center justify-center">
-                {hopkinsLogo && <img src={hopkinsLogo} alt="Hopkins Arbor Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
+                <img src="/logos/hopkins.jpg" alt="Hopkins Arbor Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
               </div>
               <div className="flex items-center justify-center">
-                {seeThroughLogo && <img src={seeThroughLogo} alt="Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
+                <img src="/logos/see-through.png" alt="Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
               </div>
               <div className="flex items-center justify-center">
-                {weCareLogo && <img src={weCareLogo} alt="We Care Tree Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
+                <img src="/logos/we-care.jpg" alt="We Care Tree Care" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
               </div>
               <div className="flex items-center justify-center">
-                {williamLogo && <img src={williamLogo} alt="William Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />}
+                <img src="/logos/william.jpg" alt="William Tree Service" className="h-20 sm:h-32 w-auto object-contain hover:scale-105 transition-transform rounded-lg" />
               </div>
             </div>
           </div>
